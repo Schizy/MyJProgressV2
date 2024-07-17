@@ -1,7 +1,7 @@
 .PHONY: help
 .DEFAULT_GOAL = help
 
-DC=docker-compose
+DC=docker compose
 PHP=$(DC) exec php
 CONS=$(PHP) bin/console
 DB=$(DC) exec db
