@@ -1,0 +1,159 @@
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 700px;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .line {
+            padding: 6px;
+            empty-cells:hide;
+        }
+
+        .semi-line {
+            padding: 3px;
+        }
+
+        h1 {
+            padding: 0;
+            margin: 0;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        td {
+            padding: 10px;
+            margin: 0;
+        }
+
+        .interspace {
+            margin: 100px;
+        }
+
+
+        .right {
+            text-align: right;
+        }
+
+        thead {
+            background: #eee;
+        }
+
+        thead tr th {
+            padding: 8px;
+            border: 1px solid #555;
+        }
+
+        .total {
+            background: #eee;
+            padding: 7px;
+        }
+
+        .borders td {
+
+            border: 1px solid #555;
+        }
+
+        .no-border {
+            border: none !important;
+        }
+
+    </style>
+</head>
+<body>
+<table>
+    <tr>
+        <td><h1>{{ my.name }}</h1></td>
+        <td align="right"><h1>FACTURE</h1></td>
+    </tr>
+    <tr>
+        <td>
+            <div class="semi-line">{{ my.address }}</div>
+            <div class="semi-line">{{ my.city }}</div>
+            <div class="semi-line">SIRET n° {{ my.siret }}</div>
+        </td>
+        <td></td>
+    </tr>
+</table>
+<div class="interspace"></div>
+<table>
+
+    <tr>
+        <td>
+            <div class="semi-line"><strong>Facturé à</strong></div>
+            <div class="semi-line">{{ client.name }}</div>
+            <div class="semi-line">{{ client.address }}</div>
+            <div class="semi-line">{{ client.city }}</div>
+            <div class="semi-line">SIRET n° {{ client.siret }}</div>
+        </td>
+        <td  width="250" align="right" valign="top">
+            <table width="200">
+                <tr>
+                    <td align="right" style="text-align: right">
+                        <div class="line"><strong>Facture n°</strong></div>
+                        <div class="line"><strong>Date</strong></div>
+                        <div class="line"><strong>Échéance</strong></div>
+                    </td>
+                    <td class="right">
+                        <div class="line">{{ invoiceNumber }}</div>
+                        <div class="line">{{ invoiceDate }}</div>
+                        <div class="line">{{ invoiceEndDate }}</div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<div class="interspace"></div>
+
+<table class="right borders">
+    <thead>
+    <tr>
+        <th>QTÉ</th>
+        <th>DÉSIGNATION</th>
+        <th>PRIX UNIT. HT</th>
+        <th>MONTANT HT</th>
+    </tr>
+    </thead>
+    <tr>
+        {% set total = numberOfDays * tjm %}
+        <td align="center">{{ numberOfDays }}</td>
+        <td>Jours homme en Développement Back end</td>
+        <td>{{ tjm|number_format }}</td>
+        <td>{{ total|number_format }}</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="no-border"></td>
+        <td class="no-border">Total HT</td>
+        <td>{{ total|number_format }}</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="no-border"></td>
+        <td class="no-border">TVA 20.0%</td>
+        <td>{{ (total * 0.2)|number_format  }}</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="no-border"></td>
+        <td class="no-border"><h1>Total</h1></td>
+        <td class="total"><h1>{{ (total * 1.2)|number_format }} €</h1></td>
+    </tr>
+</table>
+
+<p>
+    <strong>Conditions et modalités de paiement</strong><br><br>
+    Numéro de TVA: {{ my.tva }}<br>
+    Paiement à 30 jours dès réception de facture au compte bancaire suivant:
+    <br><br>
+    {{ my.bank|nl2br }}
+</p>
+
+</body>
+</html>

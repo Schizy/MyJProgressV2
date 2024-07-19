@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="/">{{ 'menu.title'|trans }}</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">{{ 'menu.home'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">{{ 'menu.about'|trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('grammar-add') }}">{{ 'menu.add-grammar' |trans }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" target="_blank" href="/admin">{{ 'menu.admin' |trans }}</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-language" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{ app.request.locale|locale_name(app.request.locale)|u.title }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-language">
+                        <a class="dropdown-item" href="{{ path('homepage', {_locale: 'en'}) }}">English</a>
+                        <a class="dropdown-item" href="{{ path('homepage', {_locale: 'ja'}) }}">日本語</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

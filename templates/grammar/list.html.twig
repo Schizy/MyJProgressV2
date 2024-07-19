@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="col-lg-8 col-md-10 mx-auto">
+        {% for rule in grammars %}
+            <div class="post-preview">
+                <a href="{{ path("grammar-rule", { "id" : rule.id, "rule" : rule.name }) }}">
+                    <h2 class="post-title">
+                        {{ rule.name }}
+                    </h2>
+                    <h3 class="post-subtitle">
+                        {{ rule.examples.first.phrase|default('-') }}
+                    </h3>
+                </a>
+                <p class="post-meta">Posted by
+                    <a href="#">Start Bootstrap</a>
+                    on {{ rule.createdAt|date('Y-m-d H:i:s') }}</p>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

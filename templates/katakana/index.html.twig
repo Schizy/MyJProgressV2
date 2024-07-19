@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="col-lg-8 col-md-10 mx-auto">
+    <span class="katakana">{{ generatedKatakanas }}</span>
+    <br><br>
+    <div id="hidden" style="display:none">{{ generatedResponse }}</div>
+    <div onclick="display('hidden');">Afficher la réponse</div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript">
+    function display(target)
+    {
+        var x = document.getElementById(target);
+        x.style.display = x.style.display === "none" ? "block" : "none";
+    }
+</script>
+{% endblock %}
