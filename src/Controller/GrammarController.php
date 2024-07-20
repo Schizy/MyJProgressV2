@@ -6,16 +6,29 @@ use App\Entity\Example;
 use App\Entity\Grammar;
 use App\Form\ExampleFormType;
 use App\Message\ExampleMessage;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/grammars')]
 class GrammarController extends AbstractController
 {
+    private $em;
+    private $bus;
+
+    public function __construct(
+        EntityManagerInterface $em,
+        MessageBusInterface $bus
+    ) {
+        $this->em = $em;
+        $this->bus = $bus;
+    }
+
     #[Route('/', name: "grammar-list")]
     public function list()
     {
@@ -36,17 +49,17 @@ class GrammarController extends AbstractController
             $this->em->persist($example);
             $this->em->flush();
 
-            $this->bus->dispatch(new ExampleMessage($example->getId(), [
-                'from' => "controller",
-            ]));
+//            $this->bus->dispatch(new ExampleMessage($example->getId(), [
+//                'from' => "controller",
+//            ]));
 
-            $mailer->send(
-                (new NotificationEmail())
-                    ->subject('New example posted')
-                    ->htmlTemplate('emails/example_notification.html.twig')
-                    ->to($adminEmail)
-                    ->context(['example' => $example])
-            );
+//            $mailer->send(
+//                (new NotificationEmail())
+//                    ->subject('New example posted')
+//                    ->htmlTemplate('emails/example_notification.html.twig')
+//                    ->to($adminEmail)
+//                    ->context(['example' => $example])
+//            );
 
             return $this->redirect($request->getRequestUri());
         }
