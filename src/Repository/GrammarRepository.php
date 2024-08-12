@@ -15,7 +15,7 @@ class GrammarRepository extends ServiceEntityRepository
     }
 
     /**
-     * For ParamConverter purpose
+     * For ParamConverter purpose.
      */
     public function findById($id, $lockMode = null, $lockVersion = null)
     {

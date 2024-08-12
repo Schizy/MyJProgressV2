@@ -28,8 +28,8 @@ class DoNothingMiddleware implements MiddlewareInterface
             $envelope = $envelope->with(new UniqueIdStamp());
         }
 
-        //Since the middleware call themselves in circle, we continue the chain
-        //to have the other middlewares executed before we check the stamps
+        // Since the middleware call themselves in circle, we continue the chain
+        // to have the other middlewares executed before we check the stamps
         $envelope = $stack->next()->handle($envelope, $stack);
         if ($envelope->getMessage() instanceof SendEmailMessage) {
             return $envelope;
@@ -65,6 +65,6 @@ class DoNothingMiddleware implements MiddlewareInterface
 
     private function log($msg, $context)
     {
-        $this->logger->info('[{uid}][{id}] ' . $msg . ' - Middleware', $context);
+        $this->logger->info('[{uid}][{id}] '.$msg.' - Middleware', $context);
     }
 }

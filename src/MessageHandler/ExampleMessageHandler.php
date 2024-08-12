@@ -36,7 +36,7 @@ class ExampleMessageHandler implements MessageHandlerInterface
             $this->workflow->apply($example, 'publish');
             $this->em->flush();
         } else {
-            $this->logger->alert('Transition "publish" rejected for example #' . $example->getId());
+            $this->logger->alert('Transition "publish" rejected for example #'.$example->getId());
         }
     }
 }

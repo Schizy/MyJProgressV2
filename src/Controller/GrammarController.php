@@ -11,8 +11,8 @@ use Symfony\Bridge\Twig\Mime\NotificationEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/grammars')]
@@ -29,7 +29,7 @@ class GrammarController extends AbstractController
         $this->bus = $bus;
     }
 
-    #[Route('/', name: "grammar-list")]
+    #[Route('/', name: 'grammar-list')]
     public function list()
     {
         return $this->render('grammar/list.html.twig', [
@@ -38,7 +38,7 @@ class GrammarController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}-{rule}', name: "grammar-rule")]
+    #[Route('/{id}-{rule}', name: 'grammar-rule')]
     public function rule(Request $request, Grammar $grammar, $adminEmail, MailerInterface $mailer): Response
     {
         $example = (new Example())->setGrammar($grammar);

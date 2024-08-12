@@ -10,20 +10,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\HasLifecycleCallbacks]
 class Example extends AbstractEntity
 {
-    const STATES = [
+    public const STATES = [
         self::REJECTED,
         self::PENDING,
         self::PUBLISHED,
     ];
 
-    const REJECTED = 'rejected';
+    public const REJECTED = 'rejected';
 
-    const PENDING = 'pending';
+    public const PENDING = 'pending';
 
-    const PUBLISHED = 'published';
+    public const PUBLISHED = 'published';
 
-    
-    #[ORM\ManyToOne(targetEntity: \App\Entity\Grammar::class, inversedBy: 'examples')]
+    #[ORM\ManyToOne(targetEntity: Grammar::class, inversedBy: 'examples')]
     private $grammar;
 
     #[ORM\Column(type: 'string')]
@@ -41,17 +40,12 @@ class Example extends AbstractEntity
     #[Groups('grammar:list')]
     private $state = self::PENDING;
 
-    /**
-     * @return mixed
-     */
     public function getGrammar()
     {
         return $this->grammar;
     }
 
     /**
-     * @param mixed $grammar
-     *
      * @return Example
      */
     public function setGrammar($grammar)
@@ -61,17 +55,12 @@ class Example extends AbstractEntity
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getPhrase()
     {
         return $this->phrase;
     }
 
     /**
-     * @param mixed $phrase
-     *
      * @return Example
      */
     public function setPhrase($phrase)
@@ -81,17 +70,12 @@ class Example extends AbstractEntity
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getTranslation()
     {
         return $this->translation;
     }
 
     /**
-     * @param mixed $translation
-     *
      * @return Example
      */
     public function setTranslation($translation)
@@ -101,17 +85,12 @@ class Example extends AbstractEntity
         return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getState(): string
     {
         return $this->state;
     }
 
     /**
-     * @param string $state
-     *
      * @return $this
      */
     public function setState(string $state): Example

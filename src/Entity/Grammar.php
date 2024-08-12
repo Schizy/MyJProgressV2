@@ -16,20 +16,15 @@ class Grammar extends AbstractEntity
     #[Assert\Length(min: 3)]
     private $name;
 
-    #[ORM\OneToMany(targetEntity: \App\Entity\Example::class, mappedBy: 'grammar', cascade: ['persist', 'remove'])] // @Groups("grammar:list")
+    #[ORM\OneToMany(targetEntity: Example::class, mappedBy: 'grammar', cascade: ['persist', 'remove'])] // @Groups("grammar:list")
     private $examples = [];
 
-    /**
-     * @return mixed
-     */
     public function getName()
     {
         return $this->name;
     }
 
     /**
-     * @param mixed $name
-     *
      * @return Grammar
      */
     public function setName($name)
@@ -39,19 +34,11 @@ class Grammar extends AbstractEntity
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getExamples()
     {
         return $this->examples;
     }
 
-    /**
-     * @param Example $example
-     *
-     * @return Grammar
-     */
     public function addExample(Example $example): self
     {
         $this->examples[] = $example;
@@ -61,8 +48,6 @@ class Grammar extends AbstractEntity
 
     /**
      * @param Example[] $examples
-     *
-     * @return Grammar
      */
     public function setExamples(array $examples): self
     {
