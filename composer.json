@@ -15,20 +15,20 @@
         "doctrine/orm": "^3.2",
         "php-cs-fixer/shim": "^3.61",
         "runtime/frankenphp-symfony": "^0.2.0",
-        "symfony/asset": "7.0.*",
-        "symfony/asset-mapper": "7.0.*",
-        "symfony/console": "7.0.*",
-        "symfony/doctrine-messenger": "7.0.*",
-        "symfony/dotenv": "7.0.*",
+        "symfony/asset": "7.1.*",
+        "symfony/asset-mapper": "7.1.*",
+        "symfony/console": "7.1.*",
+        "symfony/doctrine-messenger": "7.1.*",
+        "symfony/dotenv": "7.1.*",
         "symfony/flex": "^2",
-        "symfony/form": "7.0.*",
-        "symfony/framework-bundle": "7.0.*",
-        "symfony/mailer": "7.0.*",
-        "symfony/messenger": "7.0.*",
-        "symfony/runtime": "7.0.*",
-        "symfony/translation": "7.0.*",
-        "symfony/twig-bundle": "7.0.*",
-        "symfony/yaml": "7.0.*",
+        "symfony/form": "7.1.*",
+        "symfony/framework-bundle": "7.1.*",
+        "symfony/mailer": "7.1.*",
+        "symfony/messenger": "7.1.*",
+        "symfony/runtime": "7.1.*",
+        "symfony/translation": "7.1.*",
+        "symfony/twig-bundle": "7.1.*",
+        "symfony/yaml": "7.1.*",
         "twig/cssinliner-extra": "^3.10",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/intl-extra": "^3.10",
@@ -82,14 +82,14 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "7.0.*",
+            "require": "7.1.*",
             "docker": true
         }
     },
     "require-dev": {
         "rector/rector": "^1.1",
         "symfony/maker-bundle": "^1.59",
-        "symfony/stopwatch": "7.0.*",
-        "symfony/web-profiler-bundle": "7.0.*"
+        "symfony/stopwatch": "7.1.*",
+        "symfony/web-profiler-bundle": "7.1.*"
     }
 }
