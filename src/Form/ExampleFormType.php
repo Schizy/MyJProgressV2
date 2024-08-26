@@ -13,11 +13,9 @@ class ExampleFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('phrase')
-            ->add('translation')
-            ->add('submit', SubmitType::class, [
-                'label' => 'Valider',
-            ]);
+            ->add('phrase', options:['label' => 'example.form.phrase'])
+            ->add('translation', options:['label' => 'example.form.translation'])
+            ->add('submit', SubmitType::class, options: ['label' => 'example.form.submit']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

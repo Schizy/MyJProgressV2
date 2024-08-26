@@ -1,0 +1,22 @@
+# MENU
+menu:
+    title: MyJProgress
+    home: ホーム
+    about: このサイトについて
+    add-grammar: 新たな文法を加える
+    admin: アドミン
+
+# HEADER
+header:
+    subtitle: どの程度まで上達したかを忘れないように
+
+# HOME
+home:
+    title: ようこそ!
+
+# EXAMPLE
+example:
+    form:
+        phrase: 例文
+        translation: 翻訳
+        submit: 投稿する

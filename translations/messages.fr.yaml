@@ -1,0 +1,22 @@
+# MENU
+menu:
+    title: MyJProgress
+    home: Accueil
+    about: A propos
+    add-grammar: Ajouter une règle de grammaire
+    admin: Admin
+
+# HEADER
+header:
+    subtitle: Avoir une vision sur ses progrès en Japonais!
+
+# HOME
+home:
+    title: Bienvenue!
+
+# EXAMPLE
+example:
+    form:
+        phrase: Phrase d'exemple
+        translation: Traduction
+        submit: Valider
