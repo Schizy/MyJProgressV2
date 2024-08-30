@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Enums\ExampleStateEnum;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -10,18 +11,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\HasLifecycleCallbacks]
 class Example extends AbstractEntity
 {
-    public const STATES = [
-        self::REJECTED,
-        self::PENDING,
-        self::PUBLISHED,
-    ];
-
-    public const REJECTED = 'rejected';
-
-    public const PENDING = 'pending';
-
-    public const PUBLISHED = 'published';
-
     #[ORM\ManyToOne(targetEntity: Grammar::class, inversedBy: 'examples')]
     private $grammar;
 
@@ -38,7 +27,7 @@ class Example extends AbstractEntity
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
     #[Groups('grammar:list')]
-    private $state = self::PENDING;
+    private ExampleStateEnum $state = ExampleStateEnum::PENDING;
 
     public function getGrammar()
     {
@@ -87,17 +76,15 @@ class Example extends AbstractEntity
 
     public function getState(): string
     {
-        return $this->state;
+        return $this->state->value;
     }
 
     /**
      * @return $this
      */
-    public function setState(string $state): Example
+    public function setState(ExampleStateEnum $state): Example
     {
-        if (in_array($state, self::STATES)) {
-            $this->state = $state;
-        }
+        $this->state = $state;
 
         return $this;
     }

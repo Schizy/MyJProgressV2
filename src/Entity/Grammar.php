@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use App\Entity\Enums\JLPTEnum;
+use App\Repository\GrammarRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: \App\Repository\GrammarRepository::class)]
+#[ORM\Entity(repositoryClass: GrammarRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class Grammar extends AbstractEntity
 {
@@ -16,28 +18,12 @@ class Grammar extends AbstractEntity
     #[Assert\Length(min: 3)]
     private $name;
 
-    #[ORM\OneToMany(targetEntity: Example::class, mappedBy: 'grammar', cascade: ['persist', 'remove'])] // @Groups("grammar:list")
+    #[ORM\Column(type: 'string')]
+    private JLPTEnum $jlpt;
+
+    #[ORM\OneToMany(targetEntity: Example::class, mappedBy: 'grammar', cascade: ['persist', 'remove'])]
+    // @Groups("grammar:list")
     private $examples = [];
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @return Grammar
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getExamples()
-    {
-        return $this->examples;
-    }
 
     public function addExample(Example $example): self
     {
@@ -67,5 +53,37 @@ class Grammar extends AbstractEntity
         }
 
         return $this;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return Grammar
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getJlpt(): JLPTEnum
+    {
+        return $this->jlpt;
+    }
+
+    public function setJlpt(JLPTEnum $jlpt): Grammar
+    {
+        $this->jlpt = $jlpt;
+
+        return $this;
+    }
+
+    public function getExamples()
+    {
+        return $this->examples;
     }
 }
