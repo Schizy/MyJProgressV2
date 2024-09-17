@@ -27,7 +27,7 @@ class Example extends AbstractEntity
     #[ORM\Column(type: 'string')]
     #[Assert\NotBlank]
     #[Groups('grammar:list')]
-    private ExampleStateEnum $state = ExampleStateEnum::PENDING;
+    private ExampleStateEnum|string $state = ExampleStateEnum::PENDING;
 
     public function getGrammar()
     {
@@ -52,7 +52,7 @@ class Example extends AbstractEntity
     /**
      * @return Example
      */
-    public function setPhrase($phrase)
+    public function setPhrase($phrase): static
     {
         $this->phrase = $phrase;
 

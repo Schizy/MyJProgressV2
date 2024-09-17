@@ -30,7 +30,7 @@ class GrammarController extends AbstractController
     }
 
     #[Route('/', name: 'grammar-list')]
-    public function list()
+    public function list(): Response
     {
         return $this->render('grammar/list.html.twig', [
             'title' => 'Liste des règles de grammaire',
@@ -38,7 +38,7 @@ class GrammarController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}-{rule}', name: 'grammar-rule')]
+    #[Route('/{id<\w+>}-{rule}', name: 'grammar-rule')]
     public function rule(Request $request, Grammar $grammar, $adminEmail, MailerInterface $mailer): Response
     {
         $example = (new Example())->setGrammar($grammar);
@@ -72,7 +72,7 @@ class GrammarController extends AbstractController
     }
 
     #[Route('add', name: 'grammar-add')]
-    public function add()
+    public function add(): Response
     {
         return $this->render('grammar/add.html.twig', [
             'title' => 'Nouvelle grammaire',

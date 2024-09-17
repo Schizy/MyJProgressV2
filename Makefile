@@ -8,21 +8,21 @@ DB=$(DC) exec db
 
 ## —— Docker 🐳  ———————————————————————————————————————————————————————————————
 u: up
-up: ## docker-compose up -d
+up: ## -u | docker-compose up -d
 	$(DC) up -d
 
 d: down
-down: ## docker-compose down
+down: ## -d | docker-compose down
 	$(DC) down -v --remove-orphans
 
 r: restart
-restart: down up ## docker compose down & up
+restart: down up ## -r | docker compose down & up
 
 php: ## Enters the PHP container
 	$(PHP) bash
 
 rp: rebuild-php
-rebuild-php: down ## Rebuilds the PHP image
+rebuild-php: down ## -rp | Rebuilds the PHP image
 	docker build docker/php
 	docker rmi myjprogress_php
 	docker tag $$(docker images -q | head -n 1) myjprogress_php
@@ -42,16 +42,16 @@ db-load: ## Loads a SQL backup file (the filename as an argument)
 	docker exec -i $$(docker-compose ps -q db) mysql -uroot -proot jpgrammar < $(filter-out $@,$(MAKECMDGOALS)) 2> /dev/null
 
 dm: db-migration
-db-migration: ## Runs doctrine migrations
+db-migration: ## -dm | Runs doctrine migrations
 	$(CONS) doctrine:migrations:migrate --no-interaction
 
 ## —— Tests 🤖 ———————————————————————————————————————————————————————————————
 t: test
-test: ## Runs tests
+test: ## -t | Runs tests
 	$(PHP) bin/phpunit
 
 tc: test-coverage
-test-coverage: ## Runs tests with code coverage
+test-coverage: ## -tc | Runs tests with code coverage
 	$(PHP) bin/phpunit --coverage-html public/code-coverage
 
 td: test-db
@@ -67,18 +67,18 @@ help: ## Generates this list
 	@grep -E '(^[a-zA-Z0-9_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}{printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}' | sed -e 's/\[32m##/[33m/'
 
 cs: code-style
-code-style: ## Fix code style
+code-style: ## -cs | Fix code style
 	$(PHP) tools/php-cs-fixer/vendor/bin/php-cs-fixer fix src
 
 redis: ## Enters redis-cli
 	$(DC) exec redis redis-cli
 
 c: consume
-consume: ## Runs messenger:consume
+consume: ## -c | Runs messenger:consume
 	$(CONS) messenger:consume -vv
 
 ut: update-translations
-update-translations: ## Updates translations files (for messages domain)
+update-translations: ## -ut – Updates translations files (for messages domain)
 	for locale in en ja ; do \
 		$(CONS) translation:update $$locale --domain=messages --force ; \
 	done

@@ -18,8 +18,9 @@ class Grammar extends AbstractEntity
     #[Assert\Length(min: 3)]
     private $name;
 
-    #[ORM\Column(type: 'string')]
-    private JLPTEnum $jlpt;
+    // todo: implémenter l'enum
+//    #[ORM\Column(type: 'string')]
+//    private JLPTEnum $jlpt;
 
     #[ORM\OneToMany(targetEntity: Example::class, mappedBy: 'grammar', cascade: ['persist', 'remove'])]
     // @Groups("grammar:list")
